@@ -1,0 +1,70 @@
+body{
+	/*background-color: #35363a;*/
+	background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8) ), url('/image/background3.jpg');
+}
+
+a{
+	text-decoration: none;
+	color: white;
+}
+a:hover{
+	text-decoration: none;
+}
+
+#title{
+	font-family: 'Luckiest Guy', cursive;
+	font-size: 65px;
+	color: #ffffff;
+
+	/* 가운데 정렬 */
+	width: 500px;
+	margin: 50px auto 20px auto;
+	text-align: center;
+}
+
+.google-search{
+	/* 가운데 정렬 */
+	width: 500px;
+	margin: 50px auto;
+	text-align: center;
+} .fa-search{
+	color: white;
+}
+
+
+/* content */
+.container > h1 {
+	color: white;
+} .col > h3 {
+	display: inline-block;
+	color: white;
+}
+
+.news-card{
+	width: 170px;
+	min-height: 200px;
+	background-color: #0e1315;
+	background-color: rgba( 0, 0, 0, 0.3 );
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 30px;
+} .news-thumbnail > img {
+	width: 170px;
+} .news-title{
+	padding: 10px;
+	font-size: 13px;
+	color: white;
+} .news-date{
+	padding: 10px;
+	font-size: 13px;
+	color: #656565;
+} 
+
+.news-card-btn{
+	display: inline-block;
+	font-size: 18px;
+	color: white;
+	float: right;
+}
+
+/**************/

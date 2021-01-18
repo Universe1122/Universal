@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <meta charset="utf8">
+        <title>
+            새 탭
+        </title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/css/bootstrap.css">
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/custom.css">
+        <link rel="stylesheet" href="/css/clock.css">
+        <script src="/js/module/jquery.min.js"></script>
+        <script src="/js/module/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div id="title">
+            Universal
+        </div>
+        <div id="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div id="timedate" class="float-right">
+                            <a id="mon">January</a>
+                            <a id="d">1</a>,
+                            <a id="y">0</a><br />
+                            <a id="h">12</a> :
+                            <a id="m">00</a>:
+                            <a id="s">00</a>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="google-search">
+                            <form method=get action="http://www.google.co.kr/search">
+                                <div class="input-container">
+                                    <i class="fas fa-search icon"></i>
+                                    <input name="q" type="text" size=25 maxlength=255 class="form-control rounded-pill search-box" placeholder="Google 검색 또는 URL 입력" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col">
+                        aaaaaaa
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <h1>Security</h1>
+                <div class="row">
+                    <div class="col">
+                        <h3>보안뉴스</h3>
+                        <div class="news-card-btn">
+                            <input type="hidden" value="boannews" autocomplete=off>
+                            <a href="#"><i class="fas fa-chevron-left"></i></a>
+                            <span class="boannews-current-page-num">1</span> / <span class="boannews-total-page-num"></span>
+                            <a href="#"><i class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <div class="row boannews">
+                            <img src="/image/loading2.gif" width="100px">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h3>데일리 시큐</h3>
+                        <div class="news-card-btn">
+                            <input type="hidden" value="dailysecu" autocomplete=off>
+                            <a href="#"><i class="fas fa-chevron-left"></i></a>
+                            <span class="dailysecu-current-page-num">1</span> / <span class="dailysecu-total-page-num"></span>
+                            <a href="#"><i class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <div class="row dailysecu">
+                            <img src="/image/loading2.gif" width="100px">
+                        </div>
+                    </div>
+                    <div class="col">
+                        One of three columns
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+        </div>
+        <script src="/js/config.js"></script>
+        <script src="/js/HTML.js"></script>
+        <script src="/js/receive.js"></script>
+        <script src="/js/event.js"></script>
+        <script src="/js/clock.js"></script>
+    </body>
+</html>

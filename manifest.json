@@ -1,0 +1,19 @@
+{
+  "name": "Universal",
+  "version": "0.1",
+  "description": "필요한 정보를 가져 옴",
+  "manifest_version": 2,
+  "background" : {
+  	"scripts" : [
+  		"js/module/jquery.min.js",
+  		"js/background/background.js"
+  	],
+  	"persistent" : false
+  },
+  "chrome_url_overrides" : {
+    	"newtab": "index.html"
+  },
+  "permissions":[
+  	"tabs"
+  ]
+}

@@ -1,0 +1,22 @@
+/* Style the input container */
+.input-container {
+	display: flex;
+}
+
+/* Style the form icons */
+.icon {
+	position: relative;
+	padding: 10px;
+	color: #35363a;
+	min-width: 50px;
+	text-align: center;
+}
+
+.search-box{
+	margin-left: -50px;
+	padding-left: 50px;
+}
+
+.container{
+	width: 95%;
+}

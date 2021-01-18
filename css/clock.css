@@ -1,0 +1,19 @@
+/* body {background-color:#2d2d2d;} */
+
+#timedate {
+  font: small-caps lighter 25px/150% "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  text-align:left;
+  width: 230px;
+  /*margin: 40px auto;*/
+  color:#fff;
+  border-left: 3px solid #ed1f24;
+  padding: 20px;
+  
+  background-color: black;
+  background-color: rgba( 0, 0, 0, 0.5 );
+}
+
+
+#h, #m, #s {
+    font-size: 40px;
+}
