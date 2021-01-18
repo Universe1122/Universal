@@ -18,7 +18,7 @@ a:hover{
 
 	/* 가운데 정렬 */
 	width: 500px;
-	margin: 50px auto 20px auto;
+	margin: 50px auto 0px auto;
 	text-align: center;
 }
 
@@ -30,6 +30,25 @@ a:hover{
 } .fa-search{
 	color: white;
 }
+
+
+/* 네이버 실시간 style */
+.naver-realtime{
+	display: inline-block;
+	margin-right: 20px;
+} .naver-realtime > tbody >tr{
+	background-color: #0e1315;
+	background-color: rgba( 0, 0, 0, 0.7 );
+	height: 35px;
+} .ranking{
+	text-align: center;
+	color: #656565;
+	width: 30px;
+} .ranking-value{
+	width: 180px;
+	color: white;
+}
+/**********************/
 
 
 /* content */

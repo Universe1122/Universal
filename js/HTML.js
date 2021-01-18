@@ -13,3 +13,11 @@ function newsCardHTML(){
 				</div>
 			</a>`;
 }
+
+
+function naverRealTimeHTML(){
+	return `<tr>
+				<td class="ranking">{{ranking_index}}</td>
+				<td class="ranking-value"><a href="{{ranking_url}}">{{ranking_value}}</a></td>
+			</tr>`;
+}

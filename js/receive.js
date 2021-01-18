@@ -1,5 +1,5 @@
-for(let i = 0; i < Object.keys(url).length; i++){
-	getNews(Object.keys(url)[i], url[Object.keys(url)[i]]);
+for(let i = 0; i < Object.keys(news_data).length; i++){
+	getNews(Object.keys(news_data)[i], url[Object.keys(news_data)[i]]);
 }
 
 function getNews(news, url){
