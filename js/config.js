@@ -9,4 +9,4 @@ const news_data = {
 	"dailysecu" : ""
 }
 
-const post_max = 6;
+const post_max = 3;

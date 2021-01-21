@@ -30,7 +30,7 @@ function showNews(data, selector){
 
 		$(selector).append(html);
 
-		if(i+1 == 6)
+		if(i+1 == post_max)
 			break;
 	}
 }
