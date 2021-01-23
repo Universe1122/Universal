@@ -3,17 +3,21 @@
 #timedate {
   font: small-caps lighter 25px/150% "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
   text-align:left;
-  width: 230px;
+  width: 330px;
   /*margin: 40px auto;*/
   color:#fff;
-  border-left: 3px solid #ed1f24;
+  /* border-left: 3px solid #ed1f24; */
   padding: 20px;
-  
-  background-color: black;
-  background-color: rgba( 0, 0, 0, 0.5 );
+  text-shadow: 2px 2px 2px black;
+  /* background-color: black;
+  background-color: rgba( 0, 0, 0, 0.5 ); */
 }
 
 
 #h, #m, #s {
     font-size: 40px;
+}
+
+#mon, #d, #y{
+  font-size: 20px;
 }

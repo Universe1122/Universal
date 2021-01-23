@@ -1,6 +1,6 @@
 body{
 	/*background-color: #35363a;*/
-	background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8) ), url('/image/background3.jpg');
+	background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8) ), url('/image/background4.jpg');
 }
 
 a{
@@ -9,17 +9,15 @@ a{
 }
 a:hover{
 	text-decoration: none;
+	color: white;
 }
 
-#title{
+
+/************ header **************/
+.title{
 	font-family: 'Luckiest Guy', cursive;
 	font-size: 65px;
 	color: #ffffff;
-
-	/* 가운데 정렬 */
-	width: 500px;
-	margin: 50px auto 0px auto;
-	text-align: center;
 }
 
 .google-search{
@@ -31,14 +29,18 @@ a:hover{
 	color: white;
 }
 
-
 /* 네이버 실시간 style */
+.naver-realtime-box{
+	height:185px;
+	margin-bottom: 100px;
+} .naver-realtime-box > h4{
+	color: rgb(223, 223, 223);
+}
 .naver-realtime{
 	display: inline-block;
 	margin-right: 20px;
 } .naver-realtime > tbody >tr{
-	background-color: #0e1315;
-	background-color: rgba( 0, 0, 0, 0.7 );
+	background-color: rgba( 0, 0, 0, 0.3 );
 	height: 35px;
 } .ranking{
 	text-align: center;
@@ -48,21 +50,28 @@ a:hover{
 	width: 180px;
 	color: white;
 }
-/**********************/
+
+.menu-list{
+	margin-top: 20px;
+} .menu{
+	color: rgb(223, 223, 223);
+	font-size: 20px;
+	text-shadow: 2px 2px 2px black;
+	margin-left: 30px;
+}
+/************** naver end *************/
+/************** header end *************/
 
 
 /* content */
-.container > h1 {
-	color: white;
-} .col > h3 {
+.col > h4 {
 	display: inline-block;
-	color: white;
+	color: rgb(223, 223, 223);
 }
 
 .news-card{
 	width: 170px;
 	min-height: 200px;
-	background-color: #0e1315;
 	background-color: rgba( 0, 0, 0, 0.3 );
 	margin-left: 10px;
 	margin-right: 10px;
