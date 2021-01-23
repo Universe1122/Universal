@@ -14,9 +14,9 @@ function updateClock() {
     mo = now.getMonth(),
     dy = now.getDate(),
     yr = now.getFullYear();
-  var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
   var tags = ["mon", "d", "y", "h", "m", "s"],
-    corr = [months[mo], dy, yr, hou, min, sec, milli];
+    corr = [months[mo], dy, yr, padLeft(hou,2), padLeft(min,2), padLeft(sec,2), milli];
   for (var i = 0; i < tags.length; i++)
     document.getElementById(tags[i]).firstChild.nodeValue = corr[i];
 }
@@ -24,6 +24,10 @@ function updateClock() {
 function initClock() {
   updateClock();
   setInterval(updateClock, 1000);
+}
+
+function padLeft(nr, n, str){
+  return Array(n-String(nr).length+1).join(str||'0')+nr;
 }
 
 // END CLOCK SCRIPT
