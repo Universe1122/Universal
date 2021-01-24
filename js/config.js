@@ -1,7 +1,8 @@
 const url = {
 	"boannews" : "http://news.lactea.kr/boannews",
 	"dailysecu" : "http://news.lactea.kr/dailysecu",
-	"naver_realtime" : "http://news.lactea.kr/naver_realtime"
+	"naver_realtime" : "http://news.lactea.kr/naver_realtime",
+	"changwon_computer" : "http://news.lactea.kr/changwon_computer"
 }
 
 const news_data = {
