@@ -24,3 +24,20 @@ function naverRealTimeHTML(){
 function toDoListForm(){
 	return ``;
 }
+
+function changwonComputerHTML(mode){
+	if(mode == "notice"){
+		return `<tr>
+					<td class="changwon-notice-place"><b class="btn_red">공지</b></td>
+					<td class="changwon-title"><a href="{{changwon-computer-link}}">{{changwon-computer-title}}</a></td>
+					<td class="changwon-date">{{changwon-computer-date}}</td>
+				</tr>`;
+	}
+	else if(mode == "post"){
+		return `<tr>
+					<td class="changwon-notice-place"></td>
+					<td class="changwon-title"><a href="{{changwon-computer-link}}">{{changwon-computer-title}}</a></td>
+					<td class="changwon-date">{{changwon-computer-date}}</td>
+				</tr>`;
+	}
+}
