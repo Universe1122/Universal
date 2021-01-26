@@ -7,7 +7,7 @@ function newsCardHTML(){
 					<div class="news-title">
 						{{news_title}}
 					</div>
-					<div class="news-date">
+					<div class="news-date date">
 						{{news_date}}
 					</div>
 				</div>
@@ -30,14 +30,14 @@ function changwonComputerHTML(mode){
 		return `<tr>
 					<td class="changwon-notice-place"><b class="btn_red">공지</b></td>
 					<td class="changwon-title"><a href="{{changwon-computer-link}}">{{changwon-computer-title}}</a></td>
-					<td class="changwon-date">{{changwon-computer-date}}</td>
+					<td class="changwon-date date">{{changwon-computer-date}}</td>
 				</tr>`;
 	}
 	else if(mode == "post"){
 		return `<tr>
 					<td class="changwon-notice-place"></td>
 					<td class="changwon-title"><a href="{{changwon-computer-link}}">{{changwon-computer-title}}</a></td>
-					<td class="changwon-date">{{changwon-computer-date}}</td>
+					<td class="changwon-date date">{{changwon-computer-date}}</td>
 				</tr>`;
 	}
 }

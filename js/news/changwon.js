@@ -52,4 +52,6 @@ function showChangwonData(data){
 
         $(".changwon_data > tbody").append(html);
     }
+
+    checkTodayPost();
 }

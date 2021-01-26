@@ -33,6 +33,8 @@ function showNews(data, selector){
 		if(i+1 == post_max)
 			break;
 	}
+
+	checkTodayPost();
 }
 
 function calculatePage(news_length){
