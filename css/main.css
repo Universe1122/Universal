@@ -75,12 +75,17 @@ a:hover{
 	color: #ADADAD;
 	border-radius: 10px;
 }
+
+.kisa{
+	margin-top: 80px;
+	margin-bottom: 50px;
+}
 /************** naver end *************/
 /************** header end *************/
 
 
 /* content */
-.col > h4 , .col > h4 > a, .menu-on{
+.col > h4 , .col > h4 > a, .menu-on, h4{
 	display: inline-block;
 	color: rgb(223, 223, 223);
 	text-shadow: 2px 2px 2px black;

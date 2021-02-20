@@ -41,3 +41,10 @@ function changwonComputerHTML(mode){
 				</tr>`;
 	}
 }
+
+function kisaNoticeHTML(){
+	return `<tr>
+				<td class="changwon-title"><a href="{{kisa-link}}">{{kisa-title}}</a></td>
+				<td class="changwon-date date">{{kisa-date}}</td>
+			</tr>`;
+}
