@@ -238,6 +238,7 @@ def hackerone():
                 "cache" : time.time()
             })
 
+    driver.close()
     result = json.dumps(hackerone_result, indent = 4, ensure_ascii = False)
     return response(result)
 
