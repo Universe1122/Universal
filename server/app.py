@@ -268,7 +268,7 @@ def initSelenium():
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument("--disable-gpu")
 
-    driver = webdriver.Chrome("./chromedriver.exe", options=options)
+    driver = webdriver.Chrome("./chromedriver", options=options)
     return driver
 
 if __name__ == '__main__':
