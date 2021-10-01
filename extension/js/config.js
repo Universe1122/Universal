@@ -4,7 +4,8 @@ const url = {
 	"naver_realtime" : server["naver_realtime"],
 	"changwon_computer" : server["changwon_computer"],
 	"changwon_waggle" : server["changwon_waggle"],
-	"kisa_notice" : server["kisa_notice"]
+	"kisa_notice" : server["kisa_notice"],
+	"hackerone" : server["hackerone"]
 }
 
 const news_data = {

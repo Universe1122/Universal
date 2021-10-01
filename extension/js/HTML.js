@@ -48,3 +48,11 @@ function kisaNoticeHTML(){
 				<td class="changwon-date date">{{kisa-date}}</td>
 			</tr>`;
 }
+
+function hackeroneHTML(){
+	return `<tr>
+				<td class="">{{severity}}</td>
+				<td class="changwon-title"><a href="{{link}}">{{title}}</a><br><span class="changwon-date date">{{target}}</span></td>
+				<td class="changwon-date date">{{timestamp}}</td>                                
+			</tr>`;
+}

@@ -9,6 +9,13 @@ from feature import boannews
 
 app = Flask(__name__)
 
+boannews_result = []
+dailysecu_result = []
+changwon_computer_result = []
+changwon_waggle_result = []
+kisa_result = []
+hackerone_result = []
+
 @app.route('/')
 def main():
     res = Response("who are you")
@@ -18,8 +25,12 @@ def main():
     
 @app.route("/boannews")
 def get_boannews():
+    if len(boannews_result) != 0 and time.time() - float(boannews_result[0]["cache"]) <= 5 * 60:
+        result = json.dumps(boannews_result, indent = 4, ensure_ascii = False)
+        return response(result)
+
     url = "https://www.boannews.com"
-    result = []
+    del boannews_result[:]
         
     res = requests.get("https://www.boannews.com/media/t_list.asp", headers = fakeUserAgent())
     soup = BeautifulSoup(res.content.decode("euc-kr") , "html.parser", from_encoding='euc-kr')
@@ -27,24 +38,29 @@ def get_boannews():
     news_list = soup.select(".news_list")
     
     for i, news in enumerate(news_list):
-        result.append({})
-        result[i]["link"] = url + news.select("a")[0].get("href")
-        result[i]["title"] = news.select(".news_txt")[0].get_text()
-        result[i]["date"] = news.select(".news_writer")[0].get_text()
-        result[i]["date"] = replaceDate(result[i]["date"][result[i]["date"].find("|")+2 :])
-        
+        boannews_result.append({})
+        boannews_result[i]["link"] = url + news.select("a")[0].get("href")
+        boannews_result[i]["title"] = news.select(".news_txt")[0].get_text()
+        boannews_result[i]["date"] = news.select(".news_writer")[0].get_text()
+        boannews_result[i]["date"] = replaceDate(boannews_result[i]["date"][boannews_result[i]["date"].find("|")+2 :])
+        boannews_result[i]["cache"] = time.time()
+
         if len(news.select("a > img")) == 0:
-            result[i]["img"] = "None"
+            boannews_result[i]["img"] = "None"
         else:
-            result[i]["img"] = url + news.select("a > img")[0].get("src")
-            
-    result = json.dumps(result, indent = 4, ensure_ascii = False)
+            boannews_result[i]["img"] = url + news.select("a > img")[0].get("src")
+    
+    result = json.dumps(boannews_result, indent = 4, ensure_ascii = False)
     return response(result)
 
 @app.route("/dailysecu")
 def dailysecu():
+    if len(dailysecu_result) != 0 and time.time() - float(dailysecu_result[0]["cache"]) <= 5 * 60:
+        result = json.dumps(dailysecu_result, indent = 4, ensure_ascii = False)
+        return response(result)
+
     url = "https://www.dailysecu.com"
-    result = []
+    del dailysecu_result[:]
     
     res = requests.get("https://www.dailysecu.com/news/articleList.html?view_type=sm", headers = fakeUserAgent())
     soup = BeautifulSoup(res.content, "html.parser", from_encoding="euc-kr")
@@ -52,20 +68,21 @@ def dailysecu():
     news_list = soup.select(".list-block")
     
     for i, news in enumerate(news_list):
-        result.append({})
-        result[i]["title"] = news.select(".list-titles")[0].get_text()
-        result[i]["link"] = url + news.select(".list-titles > a")[0].get("href")
-        result[i]["date"] = news.select(".list-dated")[0].get_text()
-        result[i]["date"] = replaceDate(result[i]["date"][result[i]["date"].find(" |", 3) + 3 : ])
+        dailysecu_result.append({})
+        dailysecu_result[i]["title"] = news.select(".list-titles")[0].get_text()
+        dailysecu_result[i]["link"] = url + news.select(".list-titles > a")[0].get("href")
+        dailysecu_result[i]["date"] = news.select(".list-dated")[0].get_text()
+        dailysecu_result[i]["date"] = replaceDate(dailysecu_result[i]["date"][dailysecu_result[i]["date"].find(" |", 3) + 3 : ])
+        dailysecu_result[i]["cache"] = time.time()
         
         if len(news.select(".list-image")) == 0:
-            result[i]["img"] = "None"
+            dailysecu_result[i]["img"] = "None"
         else:
             test = news.select(".list-image")[0]["style"]
             test = url + "/news" + test[test.find("(.") + 2 : len(test)-1]
-            result[i]["img"] = test
+            dailysecu_result[i]["img"] = test
     
-    result = json.dumps(result, indent = 4, ensure_ascii = False)
+    result = json.dumps(dailysecu_result, indent = 4, ensure_ascii = False)
     
     return response(result)
     
@@ -100,9 +117,14 @@ def dailysecu():
 
 @app.route("/changwon_computer")
 def changwon_computer():
+    if len(changwon_computer_result) != 0 and time.time() - float(changwon_computer_result[0]["cache"]) <= 5 * 60:
+        result = json.dumps(changwon_computer_result, indent = 4, ensure_ascii = False)
+        return response(result)
+
     url = "http://www.changwon.ac.kr/ce/na/ntt/selectNttList.do?mi=6627&bbsId=2187"
     post_url = "http://www.changwon.ac.kr/ce/na/ntt/selectNttInfo.do?mi=6627&nttSn={}"
-    result = []
+    
+    del changwon_computer_result[:]
     
     res = requests.get(url, headers = fakeUserAgent())
     soup = BeautifulSoup(res.content, "html.parser", from_encoding="euc-kr")
@@ -110,51 +132,61 @@ def changwon_computer():
     board_lists = soup.select("#nttTable > tbody > tr")
     
     for i, board_list in enumerate(board_lists):
-        result.append({})
+        changwon_computer_result.append({})
         
         if len(board_list.select(".btn_red")) != 0:
-            result[i]["notice"] = "true"
-            result[i]["title"] = board_list.select(".nttInfoBtn")[0].get_text().strip()[2:]
+            changwon_computer_result[i]["notice"] = "true"
+            changwon_computer_result[i]["title"] = board_list.select(".nttInfoBtn")[0].get_text().strip()[2:]
         else:
-            result[i]["notice"] = "false"
-            result[i]["title"] = board_list.select(".nttInfoBtn")[0].get_text().strip()
+            changwon_computer_result[i]["notice"] = "false"
+            changwon_computer_result[i]["title"] = board_list.select(".nttInfoBtn")[0].get_text().strip()
             
-        result[i]["date"] = replaceDate(board_list.select("td")[3].get_text())
-        result[i]["link"] = post_url.format(board_list.select("a")[0].get("data-id"))
+        changwon_computer_result[i]["date"] = replaceDate(board_list.select("td")[3].get_text())
+        changwon_computer_result[i]["link"] = post_url.format(board_list.select("a")[0].get("data-id"))
+        changwon_computer_result[i]["cache"] = time.time()
     
-    result = json.dumps(result, indent = 4, ensure_ascii = False)
+    result = json.dumps(changwon_computer_result, indent = 4, ensure_ascii = False)
     
     return response(result)
 
 @app.route("/changwon_waggle")
 def changwon_waggle():
+    if len(changwon_waggle_result) != 0 and time.time() - float(changwon_waggle_result[0]["cache"]) <= 5 * 60:
+        result = json.dumps(changwon_waggle_result, indent = 4, ensure_ascii = False)
+        return response(result)
+
     url = "http://portal.changwon.ac.kr/homePost/list.do?common=portal&homecd=portal&bno=1291"
     post_url = "http://portal.changwon.ac.kr/homePost/"
-    result = []
+    del changwon_waggle_result[:]
     
     res = requests.get(url, headers = fakeUserAgent())
     soup = BeautifulSoup(res.content, "html.parser", from_encoding = "euc-kr")
     
     board_lists = soup.select(".board-list > tbody > tr")
     for i, board_list in enumerate(board_lists):
-        result.append({})
+        changwon_waggle_result.append({})
         
         if len(board_list.select("td > img")) != 0:
-            result[i]["notice"] = "true"
+            changwon_waggle_result[i]["notice"] = "true"
         else:
-            result[i]["notice"] = "false"
+            changwon_waggle_result[i]["notice"] = "false"
             
-        result[i]["title"] = board_list.select(".left > a")[0].get_text().strip()
-        result[i]["link"] = post_url + board_list.select(".left > a")[0].get("href")
-        result[i]["date"] = replaceDate(board_list.select("td")[2].get_text().strip())
-    
-    result = json.dumps(result, indent = 4, ensure_ascii = False)
+        changwon_waggle_result[i]["title"] = board_list.select(".left > a")[0].get_text().strip()
+        changwon_waggle_result[i]["link"] = post_url + board_list.select(".left > a")[0].get("href")
+        changwon_waggle_result[i]["date"] = replaceDate(board_list.select("td")[2].get_text().strip())
+        changwon_waggle_result[i]["cache"] = time.time()
+
+    result = json.dumps(changwon_waggle_result, indent = 4, ensure_ascii = False)
     return response(result)
     
 @app.route("/kisa_notice")
 def kisa_notice():
+    if len(kisa_result) != 0 and time.time() - float(kisa_result[0]["cache"]) <= 5 * 60:
+        result = json.dumps(kisa_result, indent = 4, ensure_ascii = False)
+        return response(result)
+
     url = "https://www.kisa.or.kr/notice/notice_List.jsp"
-    result = []
+    del kisa_result[:]
     
     res = requests.get(url, headers = fakeUserAgent())
     soup = BeautifulSoup(res.content, "html.parser", from_encoding = "euc-kr")
@@ -164,20 +196,25 @@ def kisa_notice():
         if i == 5:
             break
         
-        result.append({})
-        result[i]["title"] = board_list.select(".lft > a")[0].get_text().strip()
-        result[i]["link"] = "https://www.kisa.or.kr/" + board_list.select(".lft > a")[0].get("href")
-        result[i]["date"] = replaceDate(board_list.select("td")[2].get_text().strip())
+        kisa_result.append({})
+        kisa_result[i]["title"] = board_list.select(".lft > a")[0].get_text().strip()
+        kisa_result[i]["link"] = "https://www.kisa.or.kr/" + board_list.select(".lft > a")[0].get("href")
+        kisa_result[i]["date"] = replaceDate(board_list.select("td")[2].get_text().strip())
+        kisa_result[i]["cache"] = time.time()
     
-    result = json.dumps(result, indent = 4, ensure_ascii = False)
+    result = json.dumps(kisa_result, indent = 4, ensure_ascii = False)
     return response(result)
 
 @app.route("/hackerone")
 def hackerone():
-    url = "https://hackerone.com/hacktivity?querystring=&filter=type:public&order_direction=DESC&order_field=latest_disclosable_activity_at&followed_only=false&collaboration_only=false"
-    result = []
+    if len(hackerone_result) != 0 and time.time() - float(hackerone_result[0]["cache"]) <= 5 * 60:
+        result = json.dumps(hackerone_result, indent = 4, ensure_ascii = False)
+        return response(result)
 
-    driver = webdriver.Chrome("./chromedriver.exe")
+    url = "https://hackerone.com/hacktivity?querystring=&filter=type:public&order_direction=DESC&order_field=latest_disclosable_activity_at&followed_only=false&collaboration_only=false"
+    del hackerone_result[:]
+
+    driver = initSelenium()
     driver.get(url)
     driver.implicitly_wait(3)
     time.sleep(5)
@@ -187,19 +224,21 @@ def hackerone():
     board_list = soup.select("div.card > div.card__content > div.infinite-scroll-component__outerdiv > div.infinite-scroll-component > div.fade")
     
     if len(board_list) == 0:
-        result.append({"result" : "error"})
+        hackerone_result.append({"result" : "error"})
     else:
         for l in board_list:
-            result.append({
+            hackerone_result.append({
                 "up_cnt" : l.select("span.inline-help")[0].text,
                 "title" : l.select("strong")[0].text,
                 "target" : l.select("strong > a.daisy-link")[1].text, # l.select("strong > a.daisy-link")[1]["href"]
                 "severity" : l.select("div.spec-severity-rating")[0].text,
                 "image" : l.select("img.daisy-avatar--medium")[0]["src"],
-                "timestamp" : l.select("span.spec-hacktivity-item-timestamp")[0].text
+                "timestamp" : l.select("span.spec-hacktivity-item-timestamp")[0].text,
+                "link" : l.select("a.hacktivity-item__publicly-disclosed")[0]["href"],
+                "cache" : time.time()
             })
-    
-    result = json.dumps(result, indent = 4, ensure_ascii = False)
+
+    result = json.dumps(hackerone_result, indent = 4, ensure_ascii = False)
     return response(result)
 
 def response(data):
@@ -220,6 +259,15 @@ def replaceDate(date):
     date = date.replace("-", ".")
     
     return date
+
+def initSelenium():
+    options = webdriver.ChromeOptions()
+    options.add_argument('headless')
+    options.add_argument('window-size=1920x1080')
+    options.add_argument("disable-gpu")
+
+    driver = webdriver.Chrome("./chromedriver.exe", options=options)
+    return driver
 
 if __name__ == '__main__':
     app.run(port = 7202, debug=True)
