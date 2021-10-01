@@ -2,6 +2,8 @@ from flask import Flask, Response, jsonify
 from bs4 import BeautifulSoup
 import json
 import requests
+from selenium import webdriver
+import time
 
 from feature import boannews
 
@@ -16,7 +18,27 @@ def main():
     
 @app.route("/boannews")
 def get_boannews():
-    result = boannews.getData()
+    url = "https://www.boannews.com"
+    result = []
+        
+    res = requests.get("https://www.boannews.com/media/t_list.asp", headers = fakeUserAgent())
+    soup = BeautifulSoup(res.content.decode("euc-kr") , "html.parser", from_encoding='euc-kr')
+    
+    news_list = soup.select(".news_list")
+    
+    for i, news in enumerate(news_list):
+        result.append({})
+        result[i]["link"] = url + news.select("a")[0].get("href")
+        result[i]["title"] = news.select(".news_txt")[0].get_text()
+        result[i]["date"] = news.select(".news_writer")[0].get_text()
+        result[i]["date"] = replaceDate(result[i]["date"][result[i]["date"].find("|")+2 :])
+        
+        if len(news.select("a > img")) == 0:
+            result[i]["img"] = "None"
+        else:
+            result[i]["img"] = url + news.select("a > img")[0].get("src")
+            
+    result = json.dumps(result, indent = 4, ensure_ascii = False)
     return response(result)
 
 @app.route("/dailysecu")
@@ -150,6 +172,36 @@ def kisa_notice():
     result = json.dumps(result, indent = 4, ensure_ascii = False)
     return response(result)
 
+@app.route("/hackerone")
+def hackerone():
+    url = "https://hackerone.com/hacktivity?querystring=&filter=type:public&order_direction=DESC&order_field=latest_disclosable_activity_at&followed_only=false&collaboration_only=false"
+    result = []
+
+    driver = webdriver.Chrome("./chromedriver.exe")
+    driver.get(url)
+    driver.implicitly_wait(3)
+    time.sleep(5)
+
+    html = driver.page_source
+    soup = BeautifulSoup(html, "html.parser")
+    board_list = soup.select("div.card > div.card__content > div.infinite-scroll-component__outerdiv > div.infinite-scroll-component > div.fade")
+    
+    if len(board_list) == 0:
+        result.append({"result" : "error"})
+    else:
+        for l in board_list:
+            result.append({
+                "up_cnt" : l.select("span.inline-help")[0].text,
+                "title" : l.select("strong")[0].text,
+                "target" : l.select("strong > a.daisy-link")[1].text, # l.select("strong > a.daisy-link")[1]["href"]
+                "severity" : l.select("div.spec-severity-rating")[0].text,
+                "image" : l.select("img.daisy-avatar--medium")[0]["src"],
+                "timestamp" : l.select("span.spec-hacktivity-item-timestamp")[0].text
+            })
+    
+    result = json.dumps(result, indent = 4, ensure_ascii = False)
+    return response(result)
+
 def response(data):
     res = Response(data);
     res.headers["Access-Control-Allow-Origin"] = "*"
@@ -170,4 +222,4 @@ def replaceDate(date):
     return date
 
 if __name__ == '__main__':
-    app.run(port = 7202, debug=True);
+    app.run(port = 7202, debug=True)
