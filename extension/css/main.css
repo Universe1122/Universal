@@ -30,9 +30,11 @@ a:hover{
 	color: white;
 }
 
-/* 네이버 실시간 style */
+/* hackerone style */
 .hackerone-box{
-	height:185px;
+	z-index:2;
+	position:relative;
+	height:250px;
 	margin-bottom: 100px;
 } .hackerone-box > h4{
 	color: rgb(223, 223, 223);
@@ -83,7 +85,6 @@ a:hover{
 }
 /************** naver end *************/
 /************** header end *************/
-
 
 /* content */
 .col > h4 , .col > h4 > a, .menu-on, h4{

@@ -3,7 +3,7 @@ fetch(url["hackerone"])
 .then(res => {
     $(".hackerone-loading").remove();
     
-    const show_list_cnt = 6;
+    const show_list_cnt = 8;
 
     for(let i=0; i<show_list_cnt; i++){
         let html = hackeroneHTML();
