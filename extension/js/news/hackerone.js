@@ -20,6 +20,10 @@ fetch(url["hackerone"])
             let severity_html = `<b class="btn_yellow">Medium</b>`;
             html = html.replace("{{severity}}", severity_html);
         }
+        else if(res[i]["severity"] == "Low"){
+            let severity_html = `<b class="btn_low">Low</b>`;
+            html = html.replace("{{severity}}", severity_html);
+        }
         else if(res[i]["severity"] == "None"){
             let severity_html = `<b class="btn_green">None</b>`;
             html = html.replace("{{severity}}", severity_html);
