@@ -222,13 +222,13 @@ def hackerone():
     html = driver.page_source
     soup = BeautifulSoup(html, "html.parser")
     board_list = soup.select("div.card > div.card__content > div.infinite-scroll-component__outerdiv > div.infinite-scroll-component > div.fade")
-    
+
     if len(board_list) == 0:
-        hackerone_result.append({"result" : "error"})
+        hackerone_result.append({"result" : "error", "cache" : time.time()})
     else:
         for l in board_list:
             hackerone_result.append({
-                "up_cnt" : l.select("span.inline-help")[0].text,
+                "up_cnt" : l.select("span")[0].text,
                 "title" : l.select("strong")[0].text,
                 "target" : l.select("strong > a.daisy-link")[1].text, # l.select("strong > a.daisy-link")[1]["href"]
                 "severity" : l.select("div.spec-severity-rating")[0].text,
