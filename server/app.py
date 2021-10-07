@@ -224,7 +224,7 @@ def hackerone():
     board_list = soup.select("div.card > div.card__content > div.infinite-scroll-component__outerdiv > div.infinite-scroll-component > div.fade")
 
     if len(board_list) == 0:
-        hackerone_result.append({"result" : "error", "cache" : time.time()})
+        hackerone_result.append({"result" : "error", "cache" : time.time() - 5 * 55})
     else:
         for l in board_list:
             hackerone_result.append({
