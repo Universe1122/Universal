@@ -234,7 +234,7 @@ def hackerone():
                 "severity" : l.select("div.spec-severity-rating")[0].text,
                 "image" : l.select("img.daisy-avatar--medium")[0]["src"],
                 "timestamp" : l.select("span.spec-hacktivity-item-timestamp")[0].text,
-                "link" : l.select("a.hacktivity-item__publicly-disclosed")[0]["href"],
+                "link" : "https://hackerone.com" + l.select("a.hacktivity-item__publicly-disclosed")[0]["href"],
                 "cache" : time.time()
             })
 
