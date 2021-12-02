@@ -208,7 +208,7 @@ def kisa_notice():
 
 @app.route("/hackerone")
 def hackerone():
-    if len(hackerone_result) != 0 and time.time() - float(hackerone_result[0]["cache"]) <= 5 * 60:
+    if len(hackerone_result) != 0 and time.time() - float(hackerone_result[0]["cache"]) <= 60 * 60:
         result = json.dumps(hackerone_result, indent = 4, ensure_ascii = False)
         return response(result)
 
