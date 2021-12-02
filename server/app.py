@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import requests
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 import time
 
 from feature import boannews
@@ -230,7 +231,7 @@ def hackerone():
             hackerone_result.append({
                 "up_cnt" : l.select("span")[0].text,
                 "title" : l.select("strong")[0].text,
-                "target" : l.select("strong > a.daisy-link")[1].text, # l.select("strong > a.daisy-link")[1]["href"]
+                "target" : l.select("strong > a.daisy-link")[0].text, # l.select("strong > a.daisy-link")[1]["href"]
                 "severity" : l.select("div.spec-severity-rating")[0].text,
                 "image" : l.select("img.daisy-avatar--medium")[0]["src"],
                 "timestamp" : l.select("span.spec-hacktivity-item-timestamp")[0].text,
@@ -268,7 +269,7 @@ def initSelenium():
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument("--disable-gpu")
 
-    driver = webdriver.Chrome("./chromedriver", options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     return driver
 
 if __name__ == '__main__':
