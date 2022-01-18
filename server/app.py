@@ -229,13 +229,13 @@ def hackerone():
     else:
         for l in board_list:
             hackerone_result.append({
-                "up_cnt" : l.select("span")[0].text,
-                "title" : l.select("strong")[0].text,
-                "target" : l.select("strong > a.daisy-link")[0].text, # l.select("strong > a.daisy-link")[1]["href"]
-                "severity" : l.select("div.spec-severity-rating")[0].text,
-                "image" : l.select("img.daisy-avatar--medium")[0]["src"],
-                "timestamp" : l.select("span.spec-hacktivity-item-timestamp")[0].text,
-                "link" : "https://hackerone.com" + l.select("a.hacktivity-item__publicly-disclosed")[0]["href"],
+                "up_cnt" : l.select("span")[0].text if len(l.select("span")) != 0 else "",
+                "title" : l.select("strong")[0].text if len(l.select("strong")) != 0 else "",
+                "target" : l.select("strong > a.daisy-link")[0].text if len(l.select("strong > a.daisy-link")) != 0 else "", # l.select("strong > a.daisy-link")[1]["href"]
+                "severity" : l.select("div.spec-severity-rating")[0].text if len(l.select("div.spec-severity-rating")) != 0 else "",
+                "image" : l.select("img.daisy-avatar--medium")[0]["src"] if len(l.select("img.daisy-avatar--medium")) else "",
+                "timestamp" : l.select("span.spec-hacktivity-item-timestamp")[0].text if len(l.select("span.spec-hacktivity-item-timestamp")) else "",
+                "link" : "https://hackerone.com" + l.select("a.hacktivity-item__publicly-disclosed")[0]["href"] if len(l.select("a.hacktivity-item__publicly-disclosed")) != 0 else "",
                 "cache" : time.time()
             })
 
